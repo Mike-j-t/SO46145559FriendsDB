@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class friends extends AppCompatActivity {
     EditText firstnameinput, lastnameinput, ageinput, addressinput;
+    Spinner genderinput;
     Button addbutton, viewbutton;
     DatabaseHelper dbhlpr;
     Context context;
@@ -23,12 +26,19 @@ public class friends extends AppCompatActivity {
 
         firstnameinput = (EditText) findViewById(R.id.firstnameinput);
         lastnameinput = (EditText) findViewById(R.id.lastnameinput);
+        genderinput = (Spinner) findViewById(R.id.genderinput);
         ageinput = (EditText) findViewById(R.id.ageinput);
         addressinput = (EditText) findViewById(R.id.addressinput);
         addbutton = (Button) findViewById(R.id.addbutton);
         viewbutton = (Button) findViewById(R.id.viewbutton);
 
         dbhlpr = new DatabaseHelper(this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.genderlist,
+                android.R.layout.simple_spinner_item
+        );
+        genderinput.setAdapter(adapter);
 
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +81,9 @@ public class friends extends AppCompatActivity {
                 }
 
                 if (addOK) {
-                    dbhlpr.addData(firstName,lastName,"????",age_as_int,address);
+                    dbhlpr.addData(firstName,lastName,
+                            genderinput.getSelectedItem().toString()
+                            ,age_as_int,address);
                     toastMessage("Friend Added!");
                 }
 
@@ -84,7 +96,6 @@ public class friends extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void toastMessage(String message) {

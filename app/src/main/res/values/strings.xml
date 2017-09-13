@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">SO46145559FriendsDB</string>
+    <string name="firstname_hint">First Name</string>
+    <string name="lastname_hint">Last Name</string>
+    <string name="age_hint">Age</string>
+    <string name="address_hint">Address</string>
+    <string name="add_button_text">ADD</string>
+    <string name="view_button_text">VIEW</string>
+    <string-array name="genderlist">
+        <item>Female</item>
+        <item>Male</item>
+        <item>Other</item>
+    </string-array>
 </resources>
